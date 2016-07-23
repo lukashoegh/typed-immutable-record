@@ -1,0 +1,44 @@
+{
+  "name": "typed-immutable-record",
+  "version": "0.0.1",
+  "description": "Factory for Typed Immutablejs.Record",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "npm run typings && rimraf ./dist; tsc;",
+    "test": "npm run typings  && npm run lint && npm run mocha",
+    "typings": "rimraf ./typings && typings install",
+    "mocha": "ts-node ./node_modules/mocha/bin/_mocha  --opts ./test/mocha.opts",
+    "lint": "tslint 'src/**/*.ts' 'test/**/*/.ts'"
+  },
+  "typings": "./lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rangle/typed-immutable-record.git"
+  },
+  "keywords": [
+    "Immutable",
+    "Record",
+    "Typed"
+  ],
+  "author": "Daniel Figueiredo <daniel.figueiredo@rangle.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rangle/typed-immutable-record/issues"
+  },
+  "homepage": "https://github.com/rangle/typed-immutable-record#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "immutable": "3.8.1",
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2",
+    "ts-loader": "^0.8.1",
+    "ts-node": "^0.5.5",
+    "tslint": "^3.11.0",
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4"
+  },
+  "peerDependencies": {
+    "immutable": "^3.8.1",
+    "typings": "^1.0.4"
+  }
+}
