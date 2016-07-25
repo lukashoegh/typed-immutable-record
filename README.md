@@ -1,5 +1,7 @@
 # typed-immutable-record
 
+[![CircleCI](https://circleci.com/gh/rangle/typed-immutable-record/tree/master.svg?style=svg)](https://circleci.com/gh/rangle/typed-immutable-record/tree/master)
+
 Typed Immutable.js Records using interfaces.
 
 The intent of this library is to offer an easy way to have types inside your application using Immutable.Record.
