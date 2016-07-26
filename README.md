@@ -1,6 +1,7 @@
 # typed-immutable-record
 
-[![CircleCI](https://circleci.com/gh/rangle/typed-immutable-record/tree/master.svg?style=svg)](https://circleci.com/gh/rangle/typed-immutable-record/tree/master)
+[![CircleCI](https://img.shields.io/circleci/project/rangle/typed-immutable-record/master.svg?maxAge=2592000)](https://circleci.com/gh/angular-redux/ng2-redux/tree/master)
+[![npm version](https://img.shields.io/npm/v/typed-immutable-record.svg)](https://www.npmjs.com/package/typed-immutable-record)
 
 Typed Immutable.js Records using interfaces.
 
