@@ -3,26 +3,26 @@ import {Record} from 'immutable';
 
 
 /**
- * Enables creation of a specified TypedRecord factory. Every record instance
- * produced from the returned function, will have defined all values of the
- * provided argument {obj} as the default values of an Immutable.Record. The
- * arguments required to create another instance of the TypedRecord are typed to
- * the <E>.
+ * Creates a factory function you can use to make TypedRecords.
  *
- * This function is also necessary to decouple the Record prototype creation
- * from the instance creation, making possible to generate a TypedRecord with
- * the default intended value and from that generate multiple other Records of
- * the same type.
+ * Every TypedRecord instance produced from the factory function will have a
+ * read-only property for each of the fields in the argument object.
+ *
+ * Additionally, TypedRecords created by the factory function will have the
+ * TypeScript shape defined by E.
+ *
+ * Finally, these TypedRecords expose the same interface as
+ * Immutable.Map<string, any>, but type adjusted to that mutating methods return
+ * a TypedRecord of the original type.
  *
  * The caller must provide two interfaces described below:
  *
- * <T> is the interface that is extending TypedRecord<T> and send itself
- * as its generic argument, filling the gap between the <E> (entity) and
- * the TypedRecord<T>.
- *
- * <E> is the data structure, POJO, entity, or model object that <T> MUST also
- * extend from, so that it inherits all of its properties and the {recordify}
- * method can also have a typed <E> argument.
+ * <E>: The TypeScript shape of the plain JavaScript object to be made
+ * immutable.
+ * 
+ * <T>: The desired TypedRecord type that each immutable record produced by the
+ * factory will have. In nearly all cases this will be an interface
+ * that extends TypedRecord<E>, E.
  *
  * @param obj is a plain JS that meets the requirements described in the
  * provided <E> interface. This object is used to set the default values of the
@@ -44,13 +44,12 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>(obj: E):
  * Utility function to generate an Immutable.Record for the provided type.
  * The caller must provide two interfaces described below:
  *
- * <T> is the interface that is extending TypedRecord<T> and send itself
- * as its generic argument, filling the gap between the <E> (entity) and
- * the TypedRecord<T>.
+ * <E>: The TypeScript shape of the plain JavaScript object to be made
+ * immutable.
  *
- * <E> is the data structure, POJO, entity, or model object that <T> MUST also
- * extend from, so that it inherits all of its properties and this {recordify}
- * method can also have a typed <E> argument.
+ * <T>: The desired TypedRecord type that each immutable record produced by the
+ * factory will have. In nearly all cases this will be an interface
+ * that extends TypedRecord<E>, E.
  *
  * This Method also does not return the {TypedFactory}, which means that it will
  * be impossible to generate new instances of the same TypedFactory. This is
