@@ -22,7 +22,7 @@ import {Record} from 'immutable';
  * 
  * <T>: The desired TypedRecord type that each immutable record produced by the
  * factory will have. In nearly all cases this will be an interface
- * that extends TypedRecord<E>, E.
+ * that extends TypedRecord<T> & E.
  *
  * @param obj is a plain JS that meets the requirements described in the
  * provided <E> interface. This object is used to set the default values of the
@@ -38,7 +38,7 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>(obj: E):
   return function TypedFactory(val: E = null): T {
     return new ImmutableRecord(val) as T;
   };
-}
+};
 
 /**
  * Utility function to generate an Immutable.Record for the provided type.
@@ -49,7 +49,7 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>(obj: E):
  *
  * <T>: The desired TypedRecord type that each immutable record produced by the
  * factory will have. In nearly all cases this will be an interface
- * that extends TypedRecord<E>, E.
+ * that extends TypedRecord<T> & E.
  *
  * This Method also does not return the {TypedFactory}, which means that it will
  * be impossible to generate new instances of the same TypedFactory. This is
