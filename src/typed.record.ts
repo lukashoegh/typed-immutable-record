@@ -5,7 +5,7 @@ import {
 
 
 /**
- * Interface that inherit from Immutable.Map that overrides all methods that 
+ * Interface that inherit from Immutable.Map that overrides all methods that
  * would return a new version of Immutable.Map itself to return <T> instead.
  * Although it is possible to do, this interface is not currently
  * supports a different Immutable.Map rather than Map<string, any>. Thus
@@ -15,7 +15,7 @@ import {
  *
  * Map<string, any> is a very flexible combination that supports basically
  * everything. However another interface can be created between TypedRecord
- * and Immutable.Map to support the generic Map arguments <K> and <V> or this 
+ * and Immutable.Map to support the generic Map arguments <K> and <V> or this
  * interface can require more generic arguments in order to support K, V.
  *
  * The implementation of this TypedRecord interface requires two interfaces. One
@@ -51,7 +51,7 @@ export interface TypedRecord<T extends TypedRecord<T>>
   mergeDeep: (obj: any) => T;
   mergeDeepWith: (
     merger: (previous?: any, next?: any, key?: string) => any,
-    obj: T
+    obj: any
   ) => T;
   setIn: (keyPath: any[] | Iterable<any, any>, value: any) => T;
   deleteIn: (keyPath: Array<any> | Iterable<any, any>) => T;
@@ -64,8 +64,8 @@ export interface TypedRecord<T extends TypedRecord<T>>
       updater: (value: any) => any
     ): T
   };
-  mergeIn: (keyPath: any[] | Iterable<any, any>, obj: T) => T;
-  mergeDeepIn: (keyPath: any[] | Iterable<any, any>, obj: T) => T;
+  mergeIn: (keyPath: any[] | Iterable<any, any>, obj: any) => T;
+  mergeDeepIn: (keyPath: any[] | Iterable<any, any>, obj: any) => T;
   withMutations: (mutator: (mutable: T) => any) => T;
   asMutable: () => T;
   asImmutable: () => T;
