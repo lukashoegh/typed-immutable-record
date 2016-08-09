@@ -1,3 +1,6 @@
 src/
 test/
 .gitignore
+typings/
+.idea/
+index.ts
