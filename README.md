@@ -58,24 +58,50 @@ Based on both animals interfaces created above, we could generate a record in th
 ```typescript
 import {makeTypedFactory} from 'typed-immutable-record';
  
-// create a plain javascript object that meets the requirements of the IAnimal interface 
-// and represents the default values of the Immutable.Record
+/*
+ create a plain javascript object that meets the requirements of the IAnimal interface 
+ and represents the default values of the Immutable.Record
+ */
 const defaultAnimal = {
   type: null,
   age: 0
 };
 
-// make the factory to enable the generation of animal records 
+/*
+ make the factory to enable the generation of animal records
+ */
 const AnimalFactory = makeTypedFactory<IAnimal, IAnimalRecord>(defaultAnimal);
 
-// create a plain javascript animal object
+/* 
+ create a plain javascript animal object
+ */
 const cat = {
   type: 'Cat',
   age: 9
 };
 
-// create the typed record!
+/* 
+ create the typed record!
+ */
 const catRecord = AnimalFactory(cat);
+
+/*
+ performing updates on the record returns another IAnimalRecord
+ and it will still be assignable to functions that requires 
+ IAnimal or IAnimalRecord
+ */
+const dogRecord = catRecord.set('type', 'Dog');
+console.log(dogRecord.type); // 'Dog'
+console.log(dogRecord.age); // 9
+
+/*
+ It will also keep the original record factory properties, so that
+ whenever you remove a property it defaults to the value when the 
+ factory was created
+ */
+const puppyRecord = dogRecord.remove('age');
+console.log(puppyRecord.age); // 0
+console.log(puppyRecord.type); // 'Dog'
 
 ```
 
