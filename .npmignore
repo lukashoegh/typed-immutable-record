@@ -4,3 +4,6 @@ test/
 typings/
 .idea/
 index.ts
+tsconfig.json
+typings.json
+tslint.json
