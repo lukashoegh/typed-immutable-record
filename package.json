@@ -1,6 +1,6 @@
 {
   "name": "typed-immutable-record",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Factory for Typed Immutablejs.Record",
   "main": "./dist/index.js",
   "scripts": {
