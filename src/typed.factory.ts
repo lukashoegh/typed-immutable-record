@@ -27,14 +27,15 @@ import {Record} from 'immutable';
  * @param obj is a plain JS that meets the requirements described in the
  * provided <E> interface. This object is used to set the default values of the
  * Immutable.Record
+ * @param name of the record
  * @returns {function(E=): T} a function Factory to produce instances of a
  * TypedRecord<T>
  * @see recordify
  */
-export function makeTypedFactory<E, T extends TypedRecord<T> & E>(obj: E):
-  (val?: E) => T {
+export function makeTypedFactory<E, T extends TypedRecord<T> & E>
+  (obj: E, name?: string): (val?: E) => T {
 
-  const ImmutableRecord = Record(obj);
+  const ImmutableRecord = Record(obj, name);
   return function TypedFactory(val: E = null): T {
     return new ImmutableRecord(val) as T;
   };
@@ -60,12 +61,14 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>(obj: E):
  * @param defaultVal is the default value for the created record type.
  * @param val is an optional attribute representing the current value for this
  * Record.
+ * @param name of the record
  * @returns {T} that is the new created TypedRecord
  */
 export function recordify<E, T extends TypedRecord<T> & E>(
   defaultVal: E,
-  val: E = null): T {
+  val: E = null,
+  name?: string): T {
 
-  const TypedRecordFactory = makeTypedFactory<E, T>(defaultVal);
+  const TypedRecordFactory = makeTypedFactory<E, T>(defaultVal, name);
   return val ? TypedRecordFactory(val) : TypedRecordFactory();
 };
