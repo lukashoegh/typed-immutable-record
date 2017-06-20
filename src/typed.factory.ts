@@ -36,7 +36,6 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>
   (obj: E, name?: string): (val?: E) => T {
 
   const ImmutableRecord = Record(obj, name);
-
   return function TypedFactory(val: E = null): T {
     let immutableRecord = new ImmutableRecord(val) as T;
     let l = {};
