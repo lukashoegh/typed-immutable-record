@@ -1,7 +1,6 @@
 import {TypedRecord} from './typed.record';
 import {Record} from 'immutable';
 
-/* tslint:disable:no-any */
 
 /**
  * Creates a factory function you can use to make TypedRecords.
@@ -80,9 +79,9 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>
  */
 export function recordify<E, T extends TypedRecord<T> & E>(
   defaultVal: E,
-  val: E,
+  val: E = null,
   name?: string): T {
 
   const TypedRecordFactory = makeTypedFactory<E, T>(defaultVal, name);
   return val ? TypedRecordFactory(val) : TypedRecordFactory();
-}
+};
