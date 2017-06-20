@@ -1,5 +1,5 @@
-import { TypedRecord } from './typed.record';
-import { Record } from 'immutable';
+import {TypedRecord} from './typed.record';
+import {Record} from 'immutable';
 
 /* tslint:disable:no-any */
 
@@ -38,7 +38,7 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>
 
   const ImmutableRecord = Record(obj, name);
 
-  return function TypedFactory(val: E): T {
+  return function TypedFactory(val: E = null): T {
     let immutableRecord = new ImmutableRecord(val) as T;
     let l = {};
     for (let key of Object.keys(obj)) {
@@ -53,7 +53,7 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>
     });
     return immutableRecord;
   };
-}
+};
 
 /**
  * Utility function to generate an Immutable.Record for the provided type.
