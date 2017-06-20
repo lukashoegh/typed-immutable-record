@@ -1,6 +1,7 @@
-import {TypedRecord} from './typed.record';
-import {Record} from 'immutable';
+import { TypedRecord } from './typed.record';
+import { Record } from 'immutable';
 
+/* tslint:disable:no-any */
 
 /**
  * Creates a factory function you can use to make TypedRecords.
@@ -36,10 +37,23 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>
   (obj: E, name?: string): (val?: E) => T {
 
   const ImmutableRecord = Record(obj, name);
-  return function TypedFactory(val: E = null): T {
-    return new ImmutableRecord(val) as T;
+
+  return function TypedFactory(val: E): T {
+    let immutableRecord = new ImmutableRecord(val) as T;
+    let l = {};
+    for (let key of Object.keys(obj)) {
+      l = Object.defineProperty(l, key, {
+        value: {
+          be: (newValue: any) => immutableRecord.set(key, newValue)
+        }
+      });
+    }
+    immutableRecord = Object.defineProperty(immutableRecord, 'let', {
+      value: l
+    });
+    return immutableRecord;
   };
-};
+}
 
 /**
  * Utility function to generate an Immutable.Record for the provided type.
@@ -66,9 +80,9 @@ export function makeTypedFactory<E, T extends TypedRecord<T> & E>
  */
 export function recordify<E, T extends TypedRecord<T> & E>(
   defaultVal: E,
-  val: E = null,
+  val: E,
   name?: string): T {
 
   const TypedRecordFactory = makeTypedFactory<E, T>(defaultVal, name);
   return val ? TypedRecordFactory(val) : TypedRecordFactory();
-};
+}

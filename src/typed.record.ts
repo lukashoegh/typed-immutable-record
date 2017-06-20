@@ -3,7 +3,6 @@ import {
   Iterable,
 } from 'immutable';
 
-
 /**
  * Interface that inherit from Immutable.Map that overrides all methods that
  * would return a new version of Immutable.Map itself to return <T> instead.
@@ -31,6 +30,9 @@ import {
  *
  * Examples in test file: 'test/typed.record.test.ts'
  */
+
+/* tslint:disable:no-any */
+
 export interface TypedRecord<T extends TypedRecord<T>>
   extends Map<string, any> {
 
@@ -69,4 +71,9 @@ export interface TypedRecord<T extends TypedRecord<T>>
   withMutations: (mutator: (mutable: T) => any) => T;
   asMutable: () => T;
   asImmutable: () => T;
-};
+  let: {
+    [P in keyof T]: {
+      be: (value: T[P]) => T
+    }
+  };
+}
